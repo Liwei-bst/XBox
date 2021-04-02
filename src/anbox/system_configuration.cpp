@@ -34,9 +34,14 @@ static std::string runtime_dir() {
     if (!snap_user_common.empty())
       path = (fs::path(snap_user_common) / "runtime").string();
     else {
+      /*
       path = anbox::utils::get_env_value("XDG_RUNTIME_DIR");
       if (path.empty())
         BOOST_THROW_EXCEPTION(std::runtime_error("No runtime directory specified"));
+      */
+      path = anbox::utils::get_env_value("XY_VIRTUAL_PHONE_DIR");
+      if(path.empty())
+        BOOST_THROW_EXCEPTION(std::runtime_error("xy: No runtime directory specified"));
     }
   }
   return path;
